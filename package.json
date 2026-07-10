@@ -1,6 +1,6 @@
 {
   "name": "aestar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Aestar is an A* pathfinding algorithm for TypeScript ",
   "main": "index.js",
   "types": "index.d.ts",
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/thebonejarmer/aestar#readme",
   "devDependencies": {
-    "typescript": "^5.6.3"
+    "typescript": "^7.0.2"
   }
 }

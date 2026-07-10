@@ -9,8 +9,8 @@ export class Pathfinder {
         return Math.sqrt(x * x + y * y);
     }
 
-    private getNeighbours(grid: Grid, node: Node): Node[] {
-        let result: Node[] = [];
+    private getNeighbours(grid: Grid, node: Node): (Node | null)[] {
+        let result: (Node | null)[] = [];
         result[0] = grid.getNode(node.x, node.y - 1);
         result[1] = grid.getNode(node.x + 1, node.y);
         result[2] = grid.getNode(node.x, node.y + 1);
@@ -20,8 +20,8 @@ export class Pathfinder {
     }
 
     public async findPath(grid: Grid, startNode: Node, endNode: Node): Promise<Node[]> {
-        if (startNode == null || endNode == null) {
-            return null;
+        if (!startNode || !endNode) {
+            return [];
         }
 
         let toSearch: Node[] = [startNode];
@@ -49,7 +49,7 @@ export class Pathfinder {
 
                 while (pathNode != null && pathNode != startNode) {
                     path.push(pathNode);
-                    pathNode = pathNode.connection;
+                    pathNode = pathNode.connection!;
                 }
 
                 let result: Node[] = [startNode];
@@ -65,10 +65,14 @@ export class Pathfinder {
             }
 
             for (let neighbour of this.getNeighbours(grid, current)) {
-                let isInSearch = toSearch.indexOf(neighbour) > -1;
-                let isInProcessed = processed.indexOf(neighbour) > -1;
+                if (!neighbour || neighbour.blocked) {
+                    continue;
+                }
 
-                if (neighbour == null || neighbour.blocked || isInProcessed) {
+                const isInSearch = toSearch.indexOf(neighbour) > -1;
+                const isInProcessed = processed.indexOf(neighbour) > -1;
+
+                if (isInProcessed) {
                     continue;
                 }
 
@@ -85,5 +89,7 @@ export class Pathfinder {
                 }
             }
         }
+
+        return [];
     }
 }

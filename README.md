@@ -31,8 +31,8 @@ const nodeStart = grid.getNode(3, 3);
 const nodeEnd = grid.getNode(20, 20);
 const path = await pathfinder.findPath(grid, nodeStart, nodeEnd);
 
-// If the path is null it means no path was found
-if (path == null) {
+// If the path is empty it means no path was found
+if (path.length === 0) {
     console.log("No path found");
     return;
 }

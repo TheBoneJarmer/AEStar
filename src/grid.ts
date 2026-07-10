@@ -17,7 +17,7 @@ export class Grid {
         return this._nodes;
     }
 
-    public getNode(x: number, y: number): Node {
+    public getNode(x: number, y: number): Node | null {
         if (x < 0 || y < 0 || x > this._width || y > this._height) {
             return null;
         }

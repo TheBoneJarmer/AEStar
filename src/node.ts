@@ -4,7 +4,7 @@ export class Node {
     private _g: number = 0;
     private _h: number = 0;
     private _blocked: boolean = false;
-    private _connection: Node = null;
+    private _connection: Node | null = null;
 
     get x(): number {
         return this._x;
@@ -46,7 +46,7 @@ export class Node {
         this._blocked = value;
     }
 
-    get connection(): Node {
+    get connection(): Node | null {
         return this._connection;
     }
 
