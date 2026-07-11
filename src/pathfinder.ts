@@ -65,7 +65,11 @@ export class Pathfinder {
             }
 
             for (let neighbour of this.getNeighbours(grid, current)) {
-                if (!neighbour || neighbour.blocked) {
+                if (!neighbour) {
+                    continue;
+                }
+
+                if (neighbour !== endNode && neighbour.blocked) {
                     continue;
                 }
 
